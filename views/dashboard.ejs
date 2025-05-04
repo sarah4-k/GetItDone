@@ -1,0 +1,23 @@
+<h2>Your Tasks</h2>
+<a href="/logout">Logout</a>
+
+<form method="POST" action="/task">
+  <input type="text" name="title" placeholder="Task title" required />
+  <input type="text" name="description" placeholder="Description" />
+  <input type="text" name="category" placeholder="Category" />
+  <input type="date" name="dueDate" />
+  <select name="priority">
+    <option value="Low">Low</option>
+    <option value="Medium" selected>Medium</option>
+    <option value="High">High</option>
+  </select>
+  <button type="submit">Add Task</button>
+</form>
+
+<ul>
+  <% tasks.forEach(task => { %>
+    <li>
+      <strong><%= task.title %></strong> — <%= task.category %> — <%= task.priority %> — due: <%= task.dueDate?.toDateString() %>
+    </li>
+  <% }) %>
+</ul>
