@@ -25,7 +25,7 @@ exports.getDashboard = async (req, res) => {
 
     const categories =[...new Set([...defaultCategories, ...(user.categories || [])])];
     
-    res.render("dashboard", { tasks, categories });
+    res.render("layouts/dashboard", { tasks, categories });
   } catch (err) {
     console.error("❌ Error loading dashboard:", err);
 
