@@ -1,89 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
-    <h2>Your Tasks</h2>
-    <a href="/logout">Logout</a>
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/PageStyle.css">
+</head>
 
-    <form method="POST" action="/task">
-      <input type="text" name="title" placeholder="Task title" required />
-      <input type="text" name="description" placeholder="Description" />
+<body>
+<%- include('../partials/nav_dashboard') %> 
 
-      <!-- Category dropdown + input -->
-      <label for="categoryDropdown">Category</label>
-      <select
-        id="categoryDropdown"
-        onchange="handleCategoryChange()"
-        class="category-select"
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Your Tasks</h2>
+    <a href="/task/add" class="btn rounded-circle add-task-btn" title="Add Task">+</a>
+  </div>
+
+  <!-- Task list -->
+  <ul class="mt-4">
+    <% tasks.forEach(task => { %>
+    <li class="mb-3">
+      <strong><%= task.title %></strong>
+      — <%= task.category %> — <%= task.priority === 1 ? "High" :
+      task.priority === 2 ? "Medium" : "Low" %> — due: <%= task.dueDate ?
+      task.dueDate.toDateString() : "No date" %>
+
+      <form
+        method="POST"
+        action="/task/<%= task._id %>/delete"
+        style="display: inline"
       >
-        <% categories.forEach(cat => { %>
-        <option value="<%= cat %>"><%= cat %></option>
-        <% }) %>
-        <option value="other">Other...</option>
-      </select>
+        <button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
+      </form>
+      <a href="/task/<%= task._id %>/edit" class="btn btn-warning btn-sm ms-2">Edit</a>
+    </li>
+    <% }) %>
+  </ul>
+</div>
 
-      <!-- Hidden input field for custom category -->
-      <input
-        type="text"
-        name="category"
-        id="customCategory"
-        placeholder="Write a category..."
-        style="display: none"
-      />
 
-      <!-- Due date -->
-      <input type="date" name="dueDate" />
-
-      <!-- Priority dropdown -->
-      <select name="priority" required>
-        <option value="1">High</option>
-        <option value="2" selected>Medium</option>
-        <option value="3">Low</option>
-      </select>
-
-      <button type="submit">Add Task</button>
-    </form>
-
-    <ul>
-      <% tasks.forEach(task => { %>
-      <li>
-        <strong><%= task.title %></strong>
-        — <%= task.category %> — <%= task.priority === 1 ? "High" :
-        task.priority === 2 ? "Medium" : "Low" %> — due: <%= task.dueDate ?
-        task.dueDate.toDateString() : "No date" %>
-        <form
-          method="POST"
-          action="/task/<%= task._id %>/delete"
-          style="display: inline"
-        >
-          <button type="submit">Delete</button>
-        </form>
-        <a href="/task/<%= task._id %>/edit">Edit</a>
-      </li>
-      <% }) %>
-    </ul>
-
-    <script>
-      function handleCategoryChange() {
-        const dropdown = document.getElementById("categoryDropdown");
-        const input = document.getElementById("customCategory");
-     
-        if (dropdown.value === "other") {
-          input.style.display = "block";
-          input.value = ""; // clear if previously auto-filled
-          input.focus();
-        } else {
-          input.style.display = "none";
-          input.value = dropdown.value; // auto-fill the chosen value
-        }
-      }
-     
-      // Call it on load in case a value is pre-selected
-      handleCategoryChange();
-    </script>
-  </body>
+<%- include('../partials/footer') %> 
+</body>
 </html>
