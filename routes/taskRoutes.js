@@ -9,6 +9,8 @@ function requireLogin(req, res, next) {
 }
 
 router.get('/dashboard', requireLogin, taskController.getDashboard);
+router.get('/task/add', requireLogin, taskController.getAddTaskPage);
 router.post('/task', requireLogin, taskController.createTask);
+
 
 module.exports = router;
