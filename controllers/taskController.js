@@ -33,6 +33,23 @@ exports.getDashboard = async (req, res) => {
   }
 };
 
+exports.getAddTaskPage = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userId);
+
+    if (!user) return res.redirect("/login");
+
+    const categories = [
+      ...new Set([...defaultCategories, ...(user.categories || [])]),
+    ];
+
+    res.render("dashboard/addTask", { categories });
+  } catch (err) {
+    console.error("❌ Error loading add task page:", err);
+    res.status(500).send("Server Error");
+  }
+};
+
 exports.createTask = async (req, res) => {
   const { title, description, dueDate, priority, category } = req.body;
 
