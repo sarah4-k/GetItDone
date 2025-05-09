@@ -16,6 +16,12 @@
     <a href="/task/add" class="btn rounded-circle add-task-btn" title="Add Task">+</a>
   </div>
 
+<% if (typeof message !== 'undefined') { %>
+    <div class="alert alert-info fw-semibold text-center">
+      <%= message %>
+    </div>
+<% } %>
+
   <!-- Task list -->
   <ul class="mt-4">
     <% tasks.forEach(task => { %>
