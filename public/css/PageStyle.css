@@ -64,3 +64,39 @@ footer{
     background-color: #5a6268;
     text-decoration: none;
   }
+ 
+.motivational-message {
+  background: linear-gradient(135deg, #d8f3f1, #c8f3f0);
+  border-left: 6px solid #02433e;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeInDown 0.5s ease-in-out;
+}
+
+
+.message-icon {
+  font-size: 32px;
+  margin-right: 16px;
+}
+
+.message-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Simple fade-in animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
