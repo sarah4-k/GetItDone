@@ -13,6 +13,11 @@
     <section class="text-box text-center p-5 rounded shadow">
       <h1 class="display-4 fw-bold mb-3">Welcome to Your To-Do List</h1>
       <p class="lead mb-4">Organize your tasks easily and effectively</p>
+       <% if (typeof message !== 'undefined') { %>
+        <div class="alert alert-success fw-semibold my-3">
+         <%= message %>
+        </div>
+      <% } %>
       <div>
         <a href="/register" class="btn btn-primary me-2 px-4">Register</a>
         <a href="/login" class="btn btn-outline-primary px-4">Login</a>
