@@ -17,9 +17,10 @@
   </div>
 
 <% if (typeof message !== 'undefined') { %>
-    <div class="alert alert-info fw-semibold text-center">
-      <%= message %>
-    </div>
+  <div class="motivational-message my-4">
+    <div class="message-icon">💡</div>
+    <div class="message-text"><%= message %></div>
+  </div>
 <% } %>
 
   <!-- Task list -->
