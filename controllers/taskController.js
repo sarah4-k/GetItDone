@@ -76,3 +76,32 @@ exports.createTask = async (req, res) => {
     res.send("Error creating task");
   }
 };
+
+exports.getDashboard = async (req, res) => {
+  try {
+    if (!req.session.userId) {
+      return res.redirect("/login");
+    }
+
+    const tasks = await Task.find({ userId: req.session.userId }).sort({
+      priority: 1,
+      dueDate: 1,
+    });
+
+    const user = await User.findById(req.session.userId);
+    if (!user) return res.redirect("/login");
+
+    const categories = [
+      ...new Set([...defaultCategories, ...(user.categories || [])]),
+    ];
+
+    let message = req.session.message || getRandomMessage(); 
+    delete req.session.message; 
+
+    res.render("layouts/dashboard", { tasks, categories, message });
+  } catch (err) {
+    console.error("❌ Error loading dashboard:", err);
+    res.status(500).send("Server Error");
+  }
+};
+
