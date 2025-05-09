@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('index', { title: "To-Do List" });
+  res.render('layouts/index', { title: "To-Do List" });
 });
 
 // Start server
