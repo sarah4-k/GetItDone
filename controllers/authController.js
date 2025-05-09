@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const getRandomMessage = require("../models/message");
 
 exports.showRegister = (req, res) => {
   res.render('register');
@@ -29,6 +30,7 @@ exports.loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.send('Incorrect password');
     req.session.userId = user._id;
+    req.session.message = getRandomMessage();
     res.redirect('/dashboard');
   } catch (err) {
     res.send('Login failed');
