@@ -7,6 +7,7 @@ const defaultCategories = [
   "Financial",
   "hygiene",
 ];
+const getRandomMessage = require('../message');
 exports.getDashboard = async (req, res) => {
   try {
     if (!req.session.userId) {
