@@ -47,5 +47,25 @@
 
 
 <%- include('../partials/footer') %> 
+<script>
+  setTimeout(() => {
+    const msgBox = document.querySelector('.motivational-message');
+    if (msgBox) msgBox.style.display = 'none';
+  }, 10000); 
+
+  setTimeout(() => {
+    fetch('/api/random-message')
+      .then(res => res.json())
+      .then(data => {
+        const msgBox = document.querySelector('.motivational-message');
+        const msgText = document.querySelector('.motivational-message .message-text');
+
+        if (msgBox && msgText) {
+          msgText.textContent = data.message;
+          msgBox.style.display = 'flex'; 
+        }
+      });
+  }, 300000); 
+</script>
 </body>
 </html>
