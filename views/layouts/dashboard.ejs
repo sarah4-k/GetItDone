@@ -18,13 +18,14 @@
   </div>
 
 <% if (typeof message !== 'undefined') { %>
-  <div class="motivational-message my-4 d-flex align-items-center justify-content-between">
-    <div class="message-icon">💡</div>
-     <div class="flex-grow-1 text-center message-text">
-      <%= message.text %>
-     </div>
-    <img src="<%= message.image %>" alt="Motivational" style="height: 70px; width: 70px;  border-radius: 12px; margin-left: 20px;">
+<div class="motivational-message my-4 d-flex align-items-center justify-content-between position-relative">
+  <div class="message-icon">💡</div>
+  <div class="flex-grow-1 text-center message-text">
+    <%= message.text %>
   </div>
+  <img src="<%= message.image %>" alt="Motivational" style="height: 70px; width: 70px; border-radius: 12px;">
+  <button class="close-btn" onclick="this.parentElement.style.display='none'">×</button>
+</div>
 <% } %>
 
   <!-- Task list -->
