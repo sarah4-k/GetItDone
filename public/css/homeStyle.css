@@ -8,9 +8,11 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(270deg, #e0f7fa, #ffffff, #d0f0f4);
-    background-size: 600% 600%;
-    animation: moveBackground 15s ease infinite;
+    background: linear-gradient(rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.60)), 
+    url('/image/homeBG.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    animation: moveBackground 20s ease-in-out infinite;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     flex-direction: column;
@@ -21,9 +23,15 @@ body {
   }
   
   @keyframes moveBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: center center;
+    }
+    50% {
+      background-position: center top;
+    }
+    100% {
+      background-position: center center;
+    }
   }
   
   .home-container {
