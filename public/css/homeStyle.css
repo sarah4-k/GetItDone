@@ -1,0 +1,91 @@
+.logo{
+    max-width: 80px;
+    height: auto;
+    width: auto;
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(270deg, #e0f7fa, #ffffff, #d0f0f4);
+    background-size: 600% 600%;
+    animation: moveBackground 15s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  @keyframes moveBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0 8%;
+    gap: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .home-text-box {
+    flex: 1;
+  }
+  
+  .home-text-box h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .home-text-box p {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .home-image {
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+    transform: translateY(30px);
+  }
+  
+  @media (max-width: 768px) {
+    .home-container {
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+  
+    .home-text-box {
+      text-align: center;
+    }
+  
+    .home-image {
+      transform: none;
+      margin-bottom: 20px;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.03);
+    font-size: 0.95rem;
+    margin-top: 60px;
+  }
