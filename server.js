@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongo');
 require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+const getRandomMessage = require('./models/message');
 
 const app = express();
 
@@ -40,3 +41,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.get('/api/random-message', (req, res) => {
+  res.json({ message: getRandomMessage() });
+});
+
