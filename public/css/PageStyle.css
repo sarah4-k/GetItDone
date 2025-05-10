@@ -65,29 +65,6 @@ footer{
     text-decoration: none;
   }
  
-.motivational-message {
-  background: linear-gradient(135deg, #d8f3f1, #c8f3f0);
-  border-left: 6px solid #02433e;
-  border-radius: 12px;
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-  font-family: 'Segoe UI', sans-serif;
-  animation: fadeInDown 0.5s ease-in-out;
-}
-
-
-.message-icon {
-  font-size: 32px;
-  margin-right: 16px;
-}
-
-.message-text {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #000000;
-}
 
 /* Simple fade-in animation */
 @keyframes fadeInDown {
@@ -100,3 +77,35 @@ footer{
     transform: translateY(0);
   }
 }
+
+.motivational-message {
+  background: linear-gradient(135deg, #d8f3f1, #c8f3f0);
+  border-left: 6px solid #02433e;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeInDown 0.5s ease-in-out;
+}
+.message-text {
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.message-icon {
+  font-size: 50px;
+  margin-right: 16px;
+}
+.message.image {
+  font-size: 50%;
+  font-weight: 600;
+  color: #000000;
+}
+
+
