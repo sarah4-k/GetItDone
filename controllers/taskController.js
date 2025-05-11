@@ -106,3 +106,12 @@ exports.getDashboard = async (req, res) => {
   }
 };
 
+exports.deleteTask = async (req, res) => {
+  try {
+    await Task.findByIdAndDelete(req.params.id);
+    res.redirect('/dashboard');
+  } catch (err) {
+    console.error('Error deleting task:', err);
+    res.status(500).send('Server Error');
+  }
+};
