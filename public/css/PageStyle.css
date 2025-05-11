@@ -1,13 +1,19 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
   background: #e0f7fa;
   font-family: 'Segoe UI', sans-serif;
   color: black;
   padding-bottom: 60px;
   display: flex;
   flex-direction: column;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -51,6 +57,8 @@ main h3 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+
+
 .footer {
   width: 100%;
   background-color: #f1f1f1;
@@ -62,7 +70,7 @@ main h3 {
   text-align: center;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.03);
   font-size: 0.95rem;
-  margin-top: 60px;
+  margin-top: auto;
 }
 
 .add-task-btn {
