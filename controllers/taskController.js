@@ -10,26 +10,59 @@ const defaultCategories = [
 const getRandomMessage = require('../models/message');
 exports.getDashboard = async (req, res) => {
   try {
-    if (!req.session.userId) {
-      return res.redirect("/login");
+    if (!req.session.userId) return res.redirect("/login");
+
+    const sort = req.query.sort || "date";
+
+    let sortObj = {};
+    switch (sort) {
+      case "priority":
+        sortObj = { priority: 1 };
+        break;
+      case "category":
+        sortObj = { category: 1 };
+        break;
+      case "date":
+      default:
+        sortObj = { dueDate: 1 };
+        break;
     }
 
-    const tasks = await Task.find({ userId: req.session.userId }).sort({
-      priority: 1,
+    const tasks = await Task.find({ userId: req.session.userId }).sort(sortObj);
+    const user = await User.findById(req.session.userId);
+    if (!user) return res.redirect("/login");
 
-      dueDate: 1,
+    const categories = [...new Set([...defaultCategories, ...(user.categories || [])])];
+    let message = req.session.message || getRandomMessage();
+    delete req.session.message;
+
+    // تقسيم المهام حسب التاريخ
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    const groupedTasks = {
+      today: [],
+      tomorrow: [],
+      later: [],
+    };
+
+    tasks.forEach(task => {
+      if (!task.dueDate) return groupedTasks.later.push(task);
+
+      const taskDate = new Date(task.dueDate);
+      if (taskDate.toDateString() === today.toDateString()) {
+        groupedTasks.today.push(task);
+      } else if (taskDate.toDateString() === tomorrow.toDateString()) {
+        groupedTasks.tomorrow.push(task);
+      } else {
+        groupedTasks.later.push(task);
+      }
     });
 
-    const user = await User.findById(req.session.userId);
-
-    if (!user) return res.redirect("/login"); 
-
-    const categories =[...new Set([...defaultCategories, ...(user.categories || [])])];
-    
-    res.render("layouts/dashboard", { tasks, categories });
+    res.render("layouts/dashboard", { groupedTasks, categories, message, sort });
   } catch (err) {
     console.error("❌ Error loading dashboard:", err);
-
     res.status(500).send("Server Error");
   }
 };
@@ -78,34 +111,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-exports.getDashboard = async (req, res) => {
-  try {
-    if (!req.session.userId) {
-      return res.redirect("/login");
-    }
-
-    const tasks = await Task.find({ userId: req.session.userId }).sort({
-      priority: 1,
-      dueDate: 1,
-    });
-
-    const user = await User.findById(req.session.userId);
-    if (!user) return res.redirect("/login");
-
-    const categories = [
-      ...new Set([...defaultCategories, ...(user.categories || [])]),
-    ];
-
-    let message = req.session.message || getRandomMessage(); 
-    delete req.session.message; 
-
-    res.render("layouts/dashboard", { tasks, categories, message });
-  } catch (err) {
-    console.error("❌ Error loading dashboard:", err);
-    res.status(500).send("Server Error");
-  }
-};
-
 exports.deleteTask = async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
@@ -113,5 +118,16 @@ exports.deleteTask = async (req, res) => {
   } catch (err) {
     console.error('Error deleting task:', err);
     res.status(500).send('Server Error');
+  }
+};
+
+exports.toggleComplete = async (req, res) => {
+  try {
+    const { isCompleted } = req.body;
+    await Task.findByIdAndUpdate(req.params.id, { isCompleted });
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('❌ Error toggling complete status:', err);
+    res.status(500).send('Server error');
   }
 };
