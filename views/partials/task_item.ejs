@@ -1,0 +1,39 @@
+<li class="card task-card list-group-item mb-3 p-3">
+    <div class="d-flex align-items-start">
+      <input 
+        class="form-check-input task-checkbox me-3" 
+        type="checkbox" 
+        data-task-id="<%= task._id %>" 
+        style="width: 24px; height: 24px; cursor: pointer;"
+        <% if (task.isCompleted) { %>checked<% } %> 
+      />
+      <div class="flex-grow-1">
+        <label class="fw-bold mb-1 <%= task.isCompleted ? 'completed-task' : '' %>" style="font-size: 1.3rem; cursor: pointer;">
+            <%= task.title %>
+          <span class="badge bg-warning text-dark ms-2" style="font-size: 0.8rem;">
+            <% if (task.priority === 1) { %>
+              High
+            <% } else if (task.priority === 2) { %>
+              Medium
+            <% } else { %>
+              Low
+            <% } %>
+          </span>
+        </label>
+        <p class="text-muted mb-1" style="font-size: 1rem;"><%= task.description || "No description provided." %></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="badge bg-info text-dark"><%= task.category %></span>
+          <small class="text-muted"><%= task.dueDate ? new Date(task.dueDate).toDateString() : 'No due date' %></small>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-3 gap-2">
+        <form action="/task/<%= task._id %>/edit" method="GET">
+          <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+        </form>
+        <form action="/task/<%= task._id %>/delete" method="POST">
+          <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </div>
+  </li>
+  
