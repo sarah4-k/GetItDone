@@ -60,7 +60,7 @@ A powerful task management web application designed to help users efficiently or
 ## **Screenshots**
 
 ### Homepage
-![Homepage](./public/image/homepage.png)
+![Homepage](public/image/homepage.png)
 
 ### Register Page
 ![Register](./public/image/register.png)
