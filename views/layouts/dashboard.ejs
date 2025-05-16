@@ -14,11 +14,8 @@
     <%- include('../partials/nav_dashboard') %>
 
     <main class="container my-5">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="mb-0">Your Tasks</h2>
-        <a href="/task/add" class="btn rounded-circle add-task-btn" title="Add Task">+</a>
-      </div>
-    
+    <h1>Welcome to the TO DO</h1>
+
       <% if (typeof message !== 'undefined') { %>
         <div class="motivational-message my-4 d-flex align-items-center justify-content-between">
           <div class="message-icon">💡</div>
@@ -28,6 +25,12 @@
           <img src="<%= message.image %>" alt="Motivational" style="height: 70px; width: 70px;  border-radius: 12px; margin-left: 20px;">
         </div>
       <% } %>
+      <br> <br>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Your Tasks</h2>
+        <a href="/task/add" class="btn rounded-circle add-task-btn" title="Add Task">+</a>
+      </div>
     
       <!-- Filter Form -->
       <form method="GET" action="/dashboard" class="mb-4" style="text-align: right;">
