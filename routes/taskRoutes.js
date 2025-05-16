@@ -13,6 +13,8 @@ router.get('/task/add', requireLogin, taskController.getAddTaskPage);
 router.post('/task', requireLogin, taskController.createTask);
 router.post('/task/:id/delete', requireLogin, taskController.deleteTask);
 router.post('/task/:id/toggle-complete', requireLogin, taskController.toggleComplete);
+router.get('/task/:id/edit', requireLogin, taskController.getEditTaskPage);
+router.post('/task/:id/edit', requireLogin, taskController.updateTask);
 
 
 module.exports = router;
