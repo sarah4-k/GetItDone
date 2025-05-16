@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="/" class="back-arrow">&#8592;</a>
         <h2>Login</h2>
         <form method="POST" action="/login">
             <input type="email" name="email" placeholder="Email" required />
@@ -16,7 +17,7 @@
             <button type="submit">Login</button>
         </form>
         <a href="/register">Don't have an account? Register</a>
-          <% if (error) { %>
+        <% if (error) { %>
             <div class="error-message">
              <%= error %>
             </div>
@@ -24,3 +25,4 @@
     </div>
 </body>
 </html>
+
