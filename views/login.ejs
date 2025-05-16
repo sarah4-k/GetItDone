@@ -16,6 +16,11 @@
             <button type="submit">Login</button>
         </form>
         <a href="/register">Don't have an account? Register</a>
+          <% if (error) { %>
+            <div class="error-message">
+             <%= error %>
+            </div>
+          <% } %>
     </div>
 </body>
 </html>
