@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="/" class="back-arrow">&#8592;</a>
         <h2>Register</h2>
         <form method="POST" action="/register">
             <input type="text" name="username" placeholder="Username" required />
@@ -17,6 +18,9 @@
             <button type="submit">Register</button>
         </form>
         <a href="/login">Already have an account? Login</a>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-message"><%= error %></div>
+          <% } %>
     </div>
 </body>
 </html>
