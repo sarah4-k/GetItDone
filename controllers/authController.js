@@ -6,10 +6,6 @@ exports.showRegister = (req, res) => {
   res.render('register');
 };
 
-exports.showLogin = (req, res) => {
-  res.render('login');
-};
-
 exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -18,7 +14,18 @@ exports.registerUser = async (req, res) => {
     req.session.userId = user._id;
     res.redirect('/dashboard');
   } catch (err) {
-    res.send('Registration failed');
+    let errorMsg = 'Registration failed';
+    
+    // تحقق من الخطأ إذا كان تكرار في username أو email
+    if (err.code === 11000) {
+      if (err.keyPattern.username) {
+        errorMsg = 'Username is already taken';
+      } else if (err.keyPattern.email) {
+        errorMsg = 'Email is already registered';
+      }
+    }
+
+    res.render('register', { error: errorMsg });
   }
 };
 
