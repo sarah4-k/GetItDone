@@ -131,3 +131,48 @@ exports.toggleComplete = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+exports.getEditTaskPage = async (req, res) => {
+  try {
+    const taskId = req.params.id;
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).send("Task not found");
+    }
+
+    const user = await User.findById(req.session.userId);
+
+    if (!user) return res.redirect("/login");
+
+    const categories = [
+      ...new Set([...defaultCategories, ...(user.categories || [])]),
+    ];
+
+    res.render("dashboard/editTask", { task, categories });
+  } catch (err) {
+    console.error("❌ Error loading edit task page:", err);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.updateTask = async (req, res) => {
+  try {
+    const { title, description, dueDate, priority, category } = req.body;
+
+    await Task.findByIdAndUpdate(req.params.id, {
+      title,
+      description,
+      dueDate,
+      priority,
+      category,
+    });
+
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error("❌ Error updating task:", err);
+    res.status(500).send("Server Error");
+  }
+};
+
+
