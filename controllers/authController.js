@@ -22,18 +22,23 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+exports.showLogin = (req, res) => {
+  res.render('login', { error: '' }); // تمرير error كقيمة افتراضية
+};
+
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.send('User not found');
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.send('Incorrect password');
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.render('login', { error: 'Invalid email or password' });
+    }
+
     req.session.userId = user._id;
     req.session.message = getRandomMessage();
     res.redirect('/dashboard');
   } catch (err) {
-    res.send('Login failed');
+    res.render('login', { error: 'An error occurred during login' });
   }
 };
 
