@@ -69,19 +69,19 @@ A powerful task management web application designed to help users efficiently or
 ![Login](./public/image/login.png)
 
 ### Dashboard
-![Dashboard](./public/image/dashboard.png)
+![Dashboard](public/image/dashboard.png)
 
 ### Add Task
-![Add Task](./public/image/addTask.png)
+![Add Task](public/image/addTask.png)
 
 ### Edit Task
-![Edit Task](./public/image/editTask.png)
+![Edit Task](public/image/editTask.png)
 
 ---
 
 ## **Flowchart**
 
-![Flowchart](./public/image/flowchart.png)
+![Flowchart](public/image/flowchart.png)
 
 ---
 
