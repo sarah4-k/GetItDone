@@ -102,6 +102,6 @@ A powerful task management web application designed to help users efficiently or
 ---
 
 ## **Team Members**
-- Waed Alrefai
+- Waeed Alrefaai
 - Sarah Alkherayef
 - Sarah Babgi
