@@ -96,6 +96,8 @@ A powerful task management web application designed to help users efficiently or
 - [Node.js](https://nodejs.org/en/): JavaScript runtime built on Chrome's V8 engine, used for server-side logic.
 - [MongoDB](https://www.mongodb.com/): NoSQL database for storing user data and tasks.
 - [Visual Studio Code](https://code.visualstudio.com/): Powerful code editor for writing and managing code efficiently.
+- [Canva](https://www.canva.com/): A graphic design platform used to design the logo.
+- [Pinterest](https://www.pinterest.com/): Some of the images used in the website were from it.
 
 ---
 
